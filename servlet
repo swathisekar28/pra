@@ -1,0 +1,352 @@
+4)	Servlet
+●	Develop a client program (HTML form or Java program) to take input values and send them to the servlet. Display the calculated gross salary.Write a servlet to calculate the gross salary of an employee based on inputs like name, employee ID, basic pay, and HRA.
+●	Design a client program to take input values for principal amount, interest rate, and loan period. Display the calculated monthly payment.Write a servlet to calculate the monthly payment for a loan based on principal amount, interest rate, and loan period.
+●	Develop a client program to take the date of birth as input and display the calculated age.Write a servlet to calculate the age based on the input date of birth.
+●	Create an HTML form displaying a list of books with checkboxes. Develop a servlet that receives the selected books, stores them in a cookie, and redirects the user to a page displaying the selected books.
+●	Design an HTML form with a list of movie titles and checkboxes. Write a servlet to capture the selected movies, save them in a cookie, and redirect the user to a page showing the chosen movies.
+1)<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Gross Salary</title>
+</head>
+<body>
+    <h2>Calculate Gross Salary</h2>
+    <form action="CalculateSalaryServlet" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="employeeID">Employee ID:</label>
+        <input type="text" id="employeeID" name="employeeID" required><br><br>
+        
+        <label for="basicPay">Basic Pay:</label>
+        <input type="number" id="basicPay" name="basicPay" required><br><br>
+        
+        <label for="HRA">HRA:</label>
+        <input type="number" id="HRA" name="HRA" required><br><br>
+        
+        <button type="submit">Calculate Gross Salary</button>
+    </form>
+</body>
+</html>
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/CalculateSalaryServlet")
+public class CalculateSalaryServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        String name = request.getParameter("name");
+        String employeeID = request.getParameter("employeeID");
+        double basicPay = Double.parseDouble(request.getParameter("basicPay"));
+        double HRA = Double.parseDouble(request.getParameter("HRA"));
+
+        // Calculate Gross Salary
+        double grossSalary = basicPay + HRA;
+
+        // Display the calculated Gross Salary
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Gross Salary</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h2>Gross Salary of " + name + " (Employee ID: " + employeeID + ")</h2>");
+        out.println("<p>Basic Pay: $" + basicPay + "</p>");
+        out.println("<p>HRA: $" + HRA + "</p>");
+        out.println("<h3>Gross Salary: $" + grossSalary + "</h3>");
+        out.println("</body>");
+        out.println("</html>");
+
+        out.close();
+    }
+}
+2)<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculate Monthly Payment</title>
+</head>
+<body>
+    <h2>Calculate Monthly Payment</h2>
+    <form action="CalculatePaymentServlet" method="post">
+        <label for="principal">Principal Amount:</label>
+        <input type="number" id="principal" name="principal" step="any" required><br><br>
+        
+        <label for="interestRate">Interest Rate (in %):</label>
+        <input type="number" id="interestRate" name="interestRate" step="any" required><br><br>
+        
+        <label for="loanPeriod">Loan Period (in months):</label>
+        <input type="number" id="loanPeriod" name="loanPeriod" required><br><br>
+        
+        <button type="submit">Calculate Monthly Payment</button>
+    </form>
+</body>
+</html>
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/CalculatePaymentServlet")
+public class CalculatePaymentServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+
+        double principal = Double.parseDouble(request.getParameter("principal"));
+        double interestRate = Double.parseDouble(request.getParameter("interestRate"));
+        int loanPeriod = Integer.parseInt(request.getParameter("loanPeriod"));
+
+        // Convert interest rate from percentage to decimal
+        double monthlyInterestRate = interestRate / 100 / 12;
+
+        // Calculate monthly payment
+        double monthlyPayment = (principal * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -loanPeriod));
+
+        // Display the calculated Monthly Payment
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>Monthly Payment</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h2>Monthly Payment Calculation</h2>");
+        out.println("<p>Principal Amount: $" + principal + "</p>");
+        out.println("<p>Interest Rate: " + interestRate + "%</p>");
+        out.println("<p>Loan Period (months): " + loanPeriod + "</p>");
+        out.println("<h3>Monthly Payment: $" + monthlyPayment + "</h3>");
+        out.println("</body>");
+        out.println("</html>");
+
+        out.close();
+    }
+}
+3)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculate Age</title>
+</head>
+<body>
+    <h2>Calculate Age</h2>
+    <form action="CalculateAgeServlet" method="post">
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob">
+        <input type="submit" value="Calculate Age">
+    </form>
+</body>
+</html>
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Period;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/CalculateAgeServlet")
+public class CalculateAgeServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get date of birth from request parameters
+        String dobString = request.getParameter("dob");
+        LocalDate dob = LocalDate.parse(dobString);
+        
+        // Calculate age
+        LocalDate currentDate = LocalDate.now();
+        Period period = Period.between(dob, currentDate);
+        int age = period.getYears();
+        
+        // Display the calculated age
+        response.setContentType("text/html");
+        response.getWriter().write("<html><head><title>Age Calculation</title></head><body>");
+        response.getWriter().write("<h2>Age Calculation Result</h2>");
+        response.getWriter().write("<p>Date of Birth: " + dob + "</p>");
+        response.getWriter().write("<p>Age: " + age + " years</p>");
+        response.getWriter().write("</body></html>");
+    }
+}
+4)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Books</title>
+</head>
+<body>
+    <h2>Select Books</h2>
+    <form action="SelectBooksServlet" method="post">
+        <input type="checkbox" name="book" value="book1"> Book 1<br>
+        <input type="checkbox" name="book" value="book2"> Book 2<br>
+        <input type="checkbox" name="book" value="book3"> Book 3<br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+SelectBooksServlet.java
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/SelectBooksServlet")
+public class SelectBooksServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get selected books
+        String[] selectedBooks = request.getParameterValues("book");
+        
+        // Store selected books in a cookie
+        Cookie cookie = new Cookie("selectedBooks", String.join(",", selectedBooks));
+        cookie.setMaxAge(60 * 60 * 24); // Cookie will expire in 1 day
+        response.addCookie(cookie);
+        
+        // Redirect user to a page displaying the selected books
+        response.sendRedirect("SelectedBooksServlet");
+    }
+}
+Servlet to Display Selected Books (SelectedBooksServlet.java):
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/SelectedBooksServlet")
+public class SelectedBooksServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get selected books from cookie
+        Cookie[] cookies = request.getCookies();
+        String selectedBooks = "";
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("selectedBooks")) {
+                    selectedBooks = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        // Display selected books
+        response.setContentType("text/html");
+        response.getWriter().println("<html><head><title>Selected Books</title></head><body>");
+        response.getWriter().println("<h2>Selected Books</h2>");
+        if (!selectedBooks.isEmpty()) {
+            String[] books = selectedBooks.split(",");
+            response.getWriter().println("<ul>");
+            for (String book : books) {
+                response.getWriter().println("<li>" + book + "</li>");
+            }
+            response.getWriter().println("</ul>");
+        } else {
+            response.getWriter().println("<p>No books selected.</p>");
+        }
+        response.getWriter().println("</body></html>");
+    }
+}
+5)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Select Movies</title>
+</head>
+<body>
+    <h2>Select Movies</h2>
+    <form action="SelectMoviesServlet" method="post">
+        <input type="checkbox" name="movie" value="The Shawshank Redemption"> The Shawshank Redemption<br>
+        <input type="checkbox" name="movie" value="The Godfather"> The Godfather<br>
+        <input type="checkbox" name="movie" value="The Dark Knight"> The Dark Knight<br>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+Servlet (SelectMoviesServlet.java):
+java
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/SelectMoviesServlet")
+public class SelectMoviesServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get selected movies
+        String[] selectedMovies = request.getParameterValues("movie");
+        
+        // Store selected movies in a cookie
+        Cookie cookie = new Cookie("selectedMovies", String.join(",", selectedMovies));
+        cookie.setMaxAge(60 * 60 * 24); // Cookie will expire in 1 day
+        response.addCookie(cookie);
+        
+        // Redirect user to a page displaying the selected movies
+        response.sendRedirect("SelectedMoviesServlet");
+    }
+}
+(SelectedMoviesServlet.java):
+java
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/SelectedMoviesServlet")
+public class SelectedMoviesServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Get selected movies from cookie
+        Cookie[] cookies = request.getCookies();
+        String selectedMovies = "";
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("selectedMovies")) {
+                    selectedMovies = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        // Display selected movies
+        response.setContentType("text/html");
+        response.getWriter().println("<html><head><title>Selected Movies</title></head><body>");
+        response.getWriter().println("<h2>Selected Movies</h2>");
+        if (!selectedMovies.isEmpty()) {
+            String[] movies = selectedMovies.split(",");
+            response.getWriter().println("<ul>");
+            for (String movie : movies) {
+                response.getWriter().println("<li>" + movie + "</li>");
+            }
+            response.getWriter().println("</ul>");
+        } else {
+            response.getWriter().println("<p>No movies selected.</p>");
+        }
+        response.getWriter().println("</body></html>");
+    }
+}
