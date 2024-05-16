@@ -1,0 +1,95 @@
+1.	Style a simple paragraph.
+●	Set the font family to Arial.
+●	Change the text color to blue.
+●	Set the font size to 16px.
+●	Add a line height of 1.5.
+●	Apply a background color of lightgray
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <title>Styled Paragraph</title>
+</head>
+<body>
+  <p>This is a simple paragraph.</p>
+</body>
+</html>
+p {
+  font-family: Arial;
+  color: blue;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: lightgray;
+}
+2.	Style a box using padding, margin, and border.
+●	Set the width to 300px.
+●	Add a padding of 20px.
+●	Apply a border of 2px solid black.
+●	Add a margin of 10px.
+●	Set a background color to lightblue.
+<div class="styled-box">
+  This is a styled box.
+</div>
+.styled-box {
+  width: 300px;
+  padding: 20px;
+  border: 2px solid black;
+  margin: 10px;
+  background-color: lightblue;
+}
+3.	Apply hover effects to a button.
+●	Set the initial background color to green.
+●	Change the background color to darkgreen on hover.
+●	Set the initial text color to white.
+●	Change the text color to yellow on hover.
+●	Add a transition effect of 0.3s for the background color.
+<button class="styled-button">Hover Me</button>
+.styled-button {
+  background-color: green;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.styled-button:hover {
+  background-color: darkgreen;
+  color: yellow;
+}
+4)Apply a custom font and shadow to a header.
+●	Import a custom font using @font-face or Google Fonts.
+●	Apply the custom font to a header.
+●	Set the font size to 24px.
+●	Add a text shadow of 1px 1px 2px black.
+●	Change the header’s color to purple.
+h1 {
+  font-family: 'Roboto', sans-serif; /* Applying the custom font */
+  font-size: 24px; /* Setting the font size to 24px */
+  color: purple; /* Changing the header's color to purple */
+  text-shadow: 1px 1px 2px black; /* Adding a text shadow */
+}
+<h1>This is a header with custom font and shadow</h1>
+5.	Create a button with animation.
+●	Set the initial background color of the button to orange.
+●	Change the background color to darkorange on hover.
+●	Add a transition of 0.4s for the background color.
+●	Set the font size to 18px.
+●	Add padding of 10px 20px to the button.
+<button class="animated-button">Click Me</button>
+.animated-button {
+  background-color: orange;
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.4s; /* Adding transition for background color */
+}
+
+.animated-button:hover {
+  background-color: darkorange;
+}
+
