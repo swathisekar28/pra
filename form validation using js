@@ -1,0 +1,159 @@
+10)	Form Validation using Javascript
+●	Develop a web page that allows the user to enter all the details of the passenger(name, age, emailid , gender).Write a client side scripting code to validate the emailid ,age and gender, where email id should consists of the special symbol @and period(.),where age between 1 to 100 and gender is male or female
+●	Develop a web page with a form for student registration. The form should include fields for Full Name, Age, Email, Student ID, and Major. Write a client-side script to validate the following:
+✔	Full Name must not be empty and should contain only alphabetic characters.
+✔	Age must be a number between 18 and 60.
+✔	Email must include '@' and '.'.
+✔	Student ID must be alphanumeric.
+✔	Major must be selected from a dropdown list.
+●	Create a form for event registration with fields for Name, Email, Phone Number, and Event Date. Implement validation rules to ensure:
+✔	Name cannot be empty.
+✔	Email must include '@' and '.'.
+✔	Phone Number must be in the format (123) 456-7890.
+✔	Event Date must be in the future.
+1)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Details Form</title>
+    <script>
+        function validateForm() {
+            // Get form elements
+            let name = document.getElementById('name').value;
+            let age = document.getElementById('age').value;
+            let email = document.getElementById('email').value;
+            let gender = document.querySelector('input[name="gender"]:checked');
+
+            // Regular expression for email validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            // Validation checks
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (isNaN(age) || age < 1 || age > 100) {
+                alert("Age must be a number between 1 and 100.");
+                return false;
+            }
+
+            if (!gender) {
+                alert("Please select a gender.");
+                return false;
+            }
+
+            // If all validations pass
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Passenger Details Form</h1>
+    <form onsubmit="return validateForm()">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+        
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" required><br><br>
+        
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+        
+        <label>Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br><br>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
+2)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration Form</title>
+    <script>
+        function validateForm() {
+            // Get form elements
+            let fullName = document.getElementById('fullName').value;
+            let age = document.getElementById('age').value;
+            let email = document.getElementById('email').value;
+            let studentId = document.getElementById('studentId').value;
+            let major = document.getElementById('major').value;
+
+            // Regular expressions for validation
+            let namePattern = /^[A-Za-z\s]+$/;
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let studentIdPattern = /^[a-zA-Z0-9]+$/;
+
+            // Validation checks
+            if (!namePattern.test(fullName)) {
+                alert("Full Name must contain only alphabetic characters.");
+                return false;
+            }
+
+            if (isNaN(age) || age < 18 || age > 60) {
+                alert("Age must be a number between 18 and 60.");
+                return false;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (!studentIdPattern.test(studentId)) {
+                alert("Student ID must be alphanumeric.");
+                return false;
+            }
+
+            if (major === "") {
+                alert("Please select a major.");
+                return false;
+            }
+
+            // If all validations pass
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Student Registration Form</h1>
+    <form onsubmit="return validateForm()">
+        <label for="fullName">Full Name:</label><br>
+        <input type="text" id="fullName" name="fullName" required><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="studentId">Student ID:</label><br>
+        <input type="text" id="studentId" name="studentId" required><br><br>
+
+        <label for="major">Major:</label><br>
+        <select id="major" name="major" required>
+            <option value="">--Select Major--</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Engineering">Engineering</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="Physics">Physics</option>
+            <option value="Chemistry">Chemistry</option>
+            <!-- Add more options as needed -->
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
