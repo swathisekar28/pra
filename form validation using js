@@ -157,3 +157,70 @@
     </form>
 </body>
 </html>
+3)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration Form</title>
+    <script>
+        function validateForm() {
+            // Get form elements
+            let name = document.getElementById('name').value;
+            let email = document.getElementById('email').value;
+            let phoneNumber = document.getElementById('phoneNumber').value;
+            let eventDate = document.getElementById('eventDate').value;
+
+            // Regular expressions for validation
+            let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            let phonePattern = /^\(\d{3}\) \d{3}-\d{4}$/;
+
+            // Validation checks
+            if (name.trim() === "") {
+                alert("Name cannot be empty.");
+                return false;
+            }
+
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            if (!phonePattern.test(phoneNumber)) {
+                alert("Phone Number must be in the format (123) 456-7890.");
+                return false;
+            }
+
+            let today = new Date();
+            let eventDateObj = new Date(eventDate);
+            if (eventDateObj <= today) {
+                alert("Event Date must be in the future.");
+                return false;
+            }
+
+            // If all validations pass
+            alert("Form submitted successfully!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <h1>Event Registration Form</h1>
+    <form onsubmit="return validateForm()">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="phoneNumber">Phone Number:</label><br>
+        <input type="text" id="phoneNumber" name="phoneNumber" placeholder="(123) 456-7890" required><br><br>
+
+        <label for="eventDate">Event Date:</label><br>
+        <input type="date" id="eventDate" name="eventDate" required><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>
