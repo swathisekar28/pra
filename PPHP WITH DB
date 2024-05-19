@@ -1,0 +1,6 @@
+7)	PHP with DB Connectivity
+●	Build a login form using HTML and PHP that allows users to enter their email address and password, and checks this information against the database to authenticate them. Validate the Form using PHP regular expressions.
+●	Build a product order form using HTML and PHP that allows users to select a product, enter a quantity, and submit the order to be stored in a MySQL database. Validate the Form using PHP regular expressions.
+●	Create a web application for student course registration. The application should allow students to select courses they want to enroll in for the upcoming semester. Validate the form inputs using PHP and store the registration details in a database
+●	Create a contact form using HTML and PHP that allows users to submit their name, email address, and message, and stores this information in a MySQL database. Validate the Form using PHP regular expressions.
+●	Create a survey form using HTML and PHP that collects user feedback on a particular topic and stores it in a MySQL database for analysis. Validate the Form using PHP regular expressions.
