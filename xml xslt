@@ -1,0 +1,330 @@
+9)	XML with XSLT
+●	Transform an XML document containing a list of products into an HTML table with columns for product name, price, and availability. If the product is not available, display a message saying so.
+●	Transform an XML document containing a list of employees into an HTML table with columns for name, job title, and salary. If the employee's salary is over a certain amount, display it in bold.
+●	Transform an XML document containing a list of students into an HTML table with columns for name, grade, and GPA. If the student's GPA is below a certain amount, display it in red.
+●	Transform an XML document containing a list of products into an HTML table with columns for product name, price, and discounted price (if applicable). If the product is on sale, display the discounted price in green.
+●	Transform an XML document containing a list of movies into an HTML table with columns for title, director, and rating. If the rating is above a certain amount, display it in yellow.
+1)<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product>
+        <name>Product 1</name>
+        <price>10.99</price>
+        <availability>Yes</availability>
+    </product>
+    <product>
+        <name>Product 2</name>
+        <price>15.99</price>
+        <availability>No</availability>
+    </product>
+    <product>
+        <name>Product 3</name>
+        <price>20.99</price>
+        <availability>Yes</availability>
+    </product>
+</products>
+xsl
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+
+    <!-- Template for the whole document -->
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Product List</title>
+            </head>
+            <body>
+                <h1>Product List</h1>
+                <table border="1">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Availability</th>
+                    </tr>
+                    <!-- Apply the template to each product -->
+                    <xsl:apply-templates select="products/product"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+    <!-- Template for each product -->
+    <xsl:template match="product">
+        <tr>
+            <td><xsl:value-of select="name"/></td>
+            <td><xsl:value-of select="price"/></td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="availability='Yes'">
+                        <xsl:value-of select="availability"/>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        Not available
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+        </tr>
+    </xsl:template>
+</xsl:stylesheet>
+2)
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+    <employee>
+        <name>John Doe</name>
+        <jobTitle>Software Engineer</jobTitle>
+        <salary>90000</salary>
+    </employee>
+    <employee>
+        <name>Jane Smith</name>
+        <jobTitle>Project Manager</jobTitle>
+        <salary>120000</salary>
+    </employee>
+    <employee>
+        <name>Robert Brown</name>
+        <jobTitle>Designer</jobTitle>
+        <salary>75000</salary>
+    </employee>
+</employees>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+
+    <!-- Template for the whole document -->
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Employee List</title>
+            </head>
+            <body>
+                <h1>Employee List</h1>
+                <table border="1">
+                    <tr>
+                        <th>Name</th>
+                        <th>Job Title</th>
+                        <th>Salary</th>
+                    </tr>
+                    <!-- Apply the template to each employee -->
+                    <xsl:apply-templates select="employees/employee"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+    <!-- Template for each employee -->
+    <xsl:template match="employee">
+        <tr>
+            <td><xsl:value-of select="name"/></td>
+            <td><xsl:value-of select="jobTitle"/></td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="salary > 100000">
+                        <b><xsl:value-of select="salary"/></b>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="salary"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+        </tr>
+    </xsl:template>
+</xsl:stylesheet>
+3)<?xml version="1.0" encoding="UTF-8"?>
+<students>
+    <student>
+        <name>John Doe</name>
+        <grade>A</grade>
+        <gpa>3.8</gpa>
+    </student>
+    <student>
+        <name>Jane Smith</name>
+        <grade>B</grade>
+        <gpa>2.9</gpa>
+    </student>
+    <student>
+        <name>Robert Brown</name>
+        <grade>C</grade>
+        <gpa>1.8</gpa>
+    </student>
+</students>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+
+    <!-- Template for the whole document -->
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Student List</title>
+                <style>
+                    .low-gpa { color: red; }
+                </style>
+            </head>
+            <body>
+                <h1>Student List</h1>
+                <table border="1">
+                    <tr>
+                        <th>Name</th>
+                        <th>Grade</th>
+                        <th>GPA</th>
+                    </tr>
+                    <!-- Apply the template to each student -->
+                    <xsl:apply-templates select="students/student"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+    <!-- Template for each student -->
+    <xsl:template match="student">
+        <tr>
+            <td><xsl:value-of select="name"/></td>
+            <td><xsl:value-of select="grade"/></td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="gpa &lt; 3.0">
+                        <span class="low-gpa"><xsl:value-of select="gpa"/></span>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="gpa"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+        </tr>
+    </xsl:template>
+</xsl:stylesheet>
+4)<?xml version="1.0" encoding="UTF-8"?>
+<products>
+    <product>
+        <name>Product 1</name>
+        <price>100.00</price>
+        <sale>
+            <discountedPrice>80.00</discountedPrice>
+        </sale>
+    </product>
+    <product>
+        <name>Product 2</name>
+        <price>150.00</price>
+    </product>
+    <product>
+        <name>Product 3</name>
+        <price>200.00</price>
+        <sale>
+            <discountedPrice>150.00</discountedPrice>
+        </sale>
+    </product>
+</products>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+    
+    <!-- Template for the whole document -->
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Product List</title>
+                <style>
+                    .discounted-price { color: green; }
+                </style>
+            </head>
+            <body>
+                <h1>Product List</h1>
+                <table border="1">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Discounted Price</th>
+                    </tr>
+                    <!-- Apply the template to each product -->
+                    <xsl:apply-templates select="products/product"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+    <!-- Template for each product -->
+    <xsl:template match="product">
+        <tr>
+            <td><xsl:value-of select="name"/></td>
+            <td><xsl:value-of select="price"/></td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="sale/discountedPrice">
+                        <span class="discounted-price"><xsl:value-of select="sale/discountedPrice"/></span>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        N/A
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+        </tr>
+    </xsl:template>
+</xsl:stylesheet>
+5)<?xml version="1.0" encoding="UTF-8"?>
+<movies>
+    <movie>
+        <title>The Shawshank Redemption</title>
+        <director>Frank Darabont</director>
+        <rating>9.3</rating>
+    </movie>
+    <movie>
+        <title>The Godfather</title>
+        <director>Francis Ford Coppola</director>
+        <rating>9.2</rating>
+    </movie>
+    <movie>
+        <title>The Dark Knight</title>
+        <director>Christopher Nolan</director>
+        <rating>9.0</rating>
+    </movie>
+    <movie>
+        <title>Pulp Fiction</title>
+        <director>Quentin Tarantino</director>
+        <rating>8.9</rating>
+    </movie>
+</movies>
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:output method="html" encoding="UTF-8" indent="yes"/>
+    
+    <!-- Template for the whole document -->
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Movie List</title>
+                <style>
+                    .high-rating { background-color: yellow; }
+                </style>
+            </head>
+            <body>
+                <h1>Movie List</h1>
+                <table border="1">
+                    <tr>
+                        <th>Title</th>
+                        <th>Director</th>
+                        <th>Rating</th>
+                    </tr>
+                    <!-- Apply the template to each movie -->
+                    <xsl:apply-templates select="movies/movie"/>
+                </table>
+            </body>
+        </html>
+    </xsl:template>
+
+    <!-- Template for each movie -->
+    <xsl:template match="movie">
+        <tr>
+            <td><xsl:value-of select="title"/></td>
+            <td><xsl:value-of select="director"/></td>
+            <td>
+                <xsl:choose>
+                    <xsl:when test="rating > 9.0">
+                        <span class="high-rating"><xsl:value-of select="rating"/></span>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:value-of select="rating"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </td>
+        </tr>
+    </xsl:template>
+</xsl:stylesheet>
