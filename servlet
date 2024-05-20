@@ -1,9 +1,7 @@
 4)	Servlet
-●	Develop a client program (HTML form or Java program) to take input values and send them to the servlet. Display the calculated gross salary.Write a servlet to calculate the gross salary of an employee based on inputs like name, employee ID, basic pay, and HRA.
-●	Design a client program to take input values for principal amount, interest rate, and loan period. Display the calculated monthly payment.Write a servlet to calculate the monthly payment for a loan based on principal amount, interest rate, and loan period.
-●	Develop a client program to take the date of birth as input and display the calculated age.Write a servlet to calculate the age based on the input date of birth.
-●	Create an HTML form displaying a list of books with checkboxes. Develop a servlet that receives the selected books, stores them in a cookie, and redirects the user to a page displaying the selected books.
-●	Design an HTML form with a list of movie titles and checkboxes. Write a servlet to capture the selected movies, save them in a cookie, and redirect the user to a page showing the chosen movies.
+●	Develop a client program (HTML form or Java program) to take input values and send them to the servlet. 
+Display the calculated gross salary.Write a servlet to calculate the gross salary of an employee based on inputs like name, employee ID, basic pay, and HRA.
+
 1)<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,7 +70,10 @@ public class CalculateSalaryServlet extends HttpServlet {
         out.close();
     }
 }
-2)<!DOCTYPE html>
+2)●	Design a client program to take input values for principal amount, interest rate, and loan period.
+Display the calculated monthly payment.Write a servlet to calculate the monthly payment for a loan based on principal amount, interest rate, and loan period.
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -140,7 +141,9 @@ public class CalculatePaymentServlet extends HttpServlet {
         out.close();
     }
 }
-3)
+3)●	Develop a client program to take the date of birth as input and display the
+calculated age.Write a servlet to calculate the age based on the input date of birth.
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -185,7 +188,9 @@ public class CalculateAgeServlet extends HttpServlet {
         response.getWriter().write("</body></html>");
     }
 }
-4)
+4●	Create an HTML form displaying a list of books with checkboxes. Develop a servlet that receives the selected
+books, stores them in a cookie, and redirects the user to a page displaying the selected books.
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -267,7 +272,9 @@ public class SelectedBooksServlet extends HttpServlet {
         response.getWriter().println("</body></html>");
     }
 }
-5)
+5)●	Design an HTML form with a list of movie titles and checkboxes. 
+Write a servlet to capture the selected movies, save them in a cookie, and redirect the user to a page showing the chosen movies.
+
 <!DOCTYPE html>
 <html>
 <head>
