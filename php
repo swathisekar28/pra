@@ -32,28 +32,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
  ?>
 </body>
 </html>
-2)<?php
-
-function isPalindrome($number) {
-    $originalNumber = $number;
-    $reversedNumber = 0;
-
-    while ($number > 0) {
-        $lastDigit = $number % 10;              // Get the last digit
-        $reversedNumber = ($reversedNumber * 10) + $lastDigit; // Append it to the reversed number
-        $number = (int)($number / 10);         // Remove the last digit
-    }
-
-    return $originalNumber === $reversedNumber;
+2)
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ $number = $_POST['number'];
+ $originalNumber = $number;
+ $reversedNumber = 0;
+ while ($number != 0) {
+ $remainder = $number % 10;
+ $reversedNumber = ($reversedNumber * 10) + $remainder;
+ $number = (int)($number / 10);
+ }
+ if ($originalNumber == $reversedNumber) {
+ $result = "$originalNumber is a palindrome.";
+ } else {
+ $result = "$originalNumber is not a palindrome.";
+ }
 }
+?>
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Palindrome Checker</title>
+</head>
+<body>
+ <form method="post" action="">
+ Enter a number: <input type="text" name="number" required>
+ <input type="submit" value="Check">
+ </form>
+ <?php
+ if (isset($result)) {
+ echo "<p>$result</p>";
+ }
+ ?>
+</body>
+</html>
 
-// Example usage:
-$number = 12321;
-if (isPalindrome($number)) {
-    echo "$number is a palindrome.";
-} else {
-    echo "$number is not a palindrome.";
-}
 3)<?php
 $message = '';
 $guess = '';
