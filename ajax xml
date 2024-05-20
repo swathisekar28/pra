@@ -1,4 +1,5 @@
-●	Create an XML file containing a list of products, each with details like name, category, price, and image URL. Use AJAX to fetch and display the products, and allow users to filter the products by category.
+●	Create an XML file containing a list of products, each with details like name, category, price, and image URL. Use AJAX to fetch and display
+the products, and allow users to filter the products by category.
 <?xml version="1.0" encoding="UTF-8"?>
 <products>
     <product>
@@ -100,7 +101,8 @@
 </body>
 </html>
 
-●	Create an XML file containing a 5-day weather forecast for different cities, including details like date, temperature, humidity, and description. Use AJAX to fetch and display the weather forecast for a selected city.
+●	Create an XML file containing a 5-day weather forecast for different cities, including details like date,
+temperature, humidity, and description. Use AJAX to fetch and display the weather forecast for a selected city.
 <?xml version="1.0" encoding="UTF-8"?>
 <weather>
     <city name="New York">
