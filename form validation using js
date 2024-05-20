@@ -9,11 +9,7 @@ The form should include fields for Full Name, Age, Email, Student ID, and Major.
 ✔	Email must include '@' and '.'.
 ✔	Student ID must be alphanumeric.
 ✔	Major must be selected from a dropdown list.
-●	Create a form for event registration with fields for Name, Email, Phone Number, and Event Date. Implement validation rules to ensure:
-✔	Name cannot be empty.
-✔	Email must include '@' and '.'.
-✔	Phone Number must be in the format (123) 456-7890.
-✔	Event Date must be in the future.
+
 1)
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +72,13 @@ The form should include fields for Full Name, Age, Email, Student ID, and Major.
     </form>
 </body>
 </html>
-2)
+2)	Develop a web page with a form for student registration. 
+The form should include fields for Full Name, Age, Email, Student ID, and Major. Write a client-side script to validate the following:
+✔	Full Name must not be empty and should contain only alphabetic characters.
+✔	Age must be a number between 18 and 60.
+✔	Email must include '@' and '.'.
+✔	Student ID must be alphanumeric.
+✔	Major must be selected from a dropdown list.
 
 <!DOCTYPE html>
 <html lang="en">
@@ -160,7 +162,11 @@ The form should include fields for Full Name, Age, Email, Student ID, and Major.
     </form>
 </body>
 </html>
-3)
+3●	Create a form for event registration with fields for Name, Email, Phone Number, and Event Date. Implement validation rules to ensure:
+✔	Name cannot be empty.
+✔	Email must include '@' and '.'.
+✔	Phone Number must be in the format (123) 456-7890.
+✔	Event Date must be in the future.
 <!DOCTYPE html>
 <html lang="en">
 <head>
