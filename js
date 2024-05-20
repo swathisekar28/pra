@@ -1,7 +1,8 @@
 3)	Java Script
 ●	Write a java script program to find out duplicate elements in an array.
 ●	Write a java script function that accepts a sentence as input and then it should list out all 3 letter words in it.
-●	Write a JavaScript program which accept a number as input and insert dashes (-) between each two even numbers. For example, if you accept 025468 the output should be 0-254-6-8
+●	Write a JavaScript program which accept a number as input and insert dashes (-) between each two even numbers.
+    For example, if you accept 025468 the output should be 0-254-6-8
 ●	Write a JavaScript function to check whether a string is an anagram or not.
 ●	Write a JavaScript program to remove all of the numbers from  'A1B2C3D4E5F6G7H8I9J10'
 1)
