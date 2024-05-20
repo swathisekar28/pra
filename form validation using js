@@ -1,6 +1,9 @@
 10)	Form Validation using Javascript
-●	Develop a web page that allows the user to enter all the details of the passenger(name, age, emailid , gender).Write a client side scripting code to validate the emailid ,age and gender, where email id should consists of the special symbol @and period(.),where age between 1 to 100 and gender is male or female
-●	Develop a web page with a form for student registration. The form should include fields for Full Name, Age, Email, Student ID, and Major. Write a client-side script to validate the following:
+●	Develop a web page that allows the user to enter all
+the details of the passenger(name, age, emailid , gender).Write a client side scripting code to validate the emailid 
+,age and gender, where email id should consists of the special symbol @and period(.),where age between 1 to 100 and gender is male or female
+●	Develop a web page with a form for student registration. 
+The form should include fields for Full Name, Age, Email, Student ID, and Major. Write a client-side script to validate the following:
 ✔	Full Name must not be empty and should contain only alphabetic characters.
 ✔	Age must be a number between 18 and 60.
 ✔	Email must include '@' and '.'.
