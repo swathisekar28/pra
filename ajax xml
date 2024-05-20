@@ -268,7 +268,8 @@ temperature, humidity, and description. Use AJAX to fetch and display the weathe
     </script>
 </body>
 </html>
-3)●	Build a movie database search application that retrieves movie information from an XML file using AJAX. Allow users to search for movies by title, genre, or release year.
+3)●	Build a movie database search application that retrieves movie information from an XML file using AJAX. Allow users to search for movies by
+title, genre, or release year.
 <!DOCTYPE html>
 <html lang="en">
 <head>
