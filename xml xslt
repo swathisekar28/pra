@@ -1,9 +1,14 @@
 9)	XML with XSLT
-●	Transform an XML document containing a list of products into an HTML table with columns for product name, price, and availability. If the product is not available, display a message saying so.
-●	Transform an XML document containing a list of employees into an HTML table with columns for name, job title, and salary. If the employee's salary is over a certain amount, display it in bold.
-●	Transform an XML document containing a list of students into an HTML table with columns for name, grade, and GPA. If the student's GPA is below a certain amount, display it in red.
-●	Transform an XML document containing a list of products into an HTML table with columns for product name, price, and discounted price (if applicable). If the product is on sale, display the discounted price in green.
-●	Transform an XML document containing a list of movies into an HTML table with columns for title, director, and rating. If the rating is above a certain amount, display it in yellow.
+●	Transform an XML document containing a list of products into an HTML table with columns for product name, price, and availability. 
+If the product is not available, display a message saying so.
+●	Transform an XML document containing a list of employees into an HTML 
+table with columns for name, job title, and salary. If the employee's salary is over a certain amount, display it in bold.
+●	Transform an XML document containing a list of students into an HTML table with columns for name, 
+grade, and GPA. If the student's GPA is below a certain amount, display it in red.
+●	Transform an XML document containing a list of products into an HTML table with columns for
+product name, price, and discounted price (if applicable). If the product is on sale, display the discounted price in green.
+●	Transform an XML document containing a list of movies into an HTML table with columns
+for title, director, and rating. If the rating is above a certain amount, display it in yellow.
 1)<?xml version="1.0" encoding="UTF-8"?>
 <products>
     <product>
