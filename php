@@ -5,48 +5,33 @@
 ●	Develop a PHP script that takes a person's age as input and categorizes them into different age groups (e.g., child, teenager, adult, senior).
 ●	Build a PHP script that prompts the user to input a password and checks its strength based on criteria such as length, presence of special characters, uppercase and lowercase letters, and numbers.
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Leap Year Checker</title>
-</head>
-<body>
-    <h1>Leap Year Checker</h1>
-    <form action="check_leap_year.php" method="post">
-        <label for="year">Enter a year:</label>
-        <input type="number" id="year" name="year" required>
-        <button type="submit">Check</button>
-    </form>
-</body>
-</html>
-<?php
+1)<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $year = intval($_POST["year"]);
-
-    if (checkLeapYear($year)) {
-        echo "<h2>$year is a leap year.</h2>";
-    } else {
-        echo "<h2>$year is not a leap year.</h2>";
-    }
-}
-
-function checkLeapYear($year) {
-    if ($year % 4 == 0) {
-        if ($year % 100 == 0) {
-            if ($year % 400 == 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return true;
-        }
-    } else {
-        return false;
-    }
+ $year = $_POST['year'];
+ if ((($year % 4 == 0) && ($year % 100 != 0)) || ($year % 400 == 0)) {
+ $result = "$year is a leap year.";
+ } else {
+ $result = "$year is not a leap year.";
+ }
 }
 ?>
+<!DOCTYPE html>
+<html>
+<head>
+ <title>Leap Year Checker</title>
+</head>
+<body>
+ <form method="post" action="">
+ Enter a year: <input type="text" name="year" required>
+ <input type="submit" value="Check">
+ </form>
+ <?php
+ if (isset($result)) {
+ echo "<p>$result</p>";
+ }
+ ?>
+</body>
+</html>
 2)<?php
 
 function isPalindrome($number) {
@@ -117,123 +102,70 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </html>
 
 4)<?php
-// Initialize a message variable
-$message = '';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ $age = $_POST['age'];
 
-// Check if the form has been submitted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $age = $_POST['age'] ?? 0; // Get the age from POST data, default to 0 if not set
-
-    // Validate input to make sure it's a number
-    if (filter_var($age, FILTER_VALIDATE_INT, array("options" => array("min_range" => 0))) === false) {
-        $message = 'Please enter a valid age.';
-    } else {
-        // Determine the age category
-        if ($age >= 0 && $age <= 12) {
-            $message = 'You are a child.';
-        } elseif ($age >= 13 && $age <= 19) {
-            $message = 'You are a teenager.';
-        } elseif ($age >= 20 && $age <= 64) {
-            $message = 'You are an adult.';
-        } else {
-            $message = 'You are a senior.';
-        }
-    }
+ if ($age >= 0 && $age <= 12) {
+ $category = "Child";
+ } elseif ($age >= 13 && $age <= 19) {
+ $category = "Teenager";
+ } elseif ($age >= 20 && $age <= 64) {
+ $category = "Adult";
+ } elseif ($age >= 65) {
+ $category = "Senior";
+ } else {
+ $category = "Invalid age";
+ }
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Age Categorizer</title>
+ <title>Age Categorizer</title>
 </head>
 <body>
-    <h1>Age Categorizer</h1>
-    <form method="post">
-        <label for="age">Enter your age:</label>
-        <input type="number" id="age" name="age" required>
-        <button type="submit">Submit</button>
-    </form>
-    <?php
-    if ($message) {
-        echo "<p>$message</p>";
-    }
-    ?>
+ <form method="post" action="">
+ Enter your age: <input type="text" name="age" required>
+ <input type="submit" value="Check">
+ </form>
+ <?php
+ if (isset($category)) {
+ echo "<p>You are a $category.</p>";
+ }
+ ?>
 </body>
 </html>
 5)
 <?php
-function checkPasswordStrength($password) {
-    $strength = 0;
-
-    // Check for minimum length
-    if (strlen($password) >= 8) {
-        $strength++;
-    } else {
-        return "Password is too short. Must be at least 8 characters.";
-    }
-
-    // Check for numbers
-    if (preg_match('/\d/', $password)) {
-        $strength++;
-    }
-
-    // Check for uppercase letters
-    if (preg_match('/[A-Z]/', $password)) {
-        $strength++;
-    }
-
-    // Check for lowercase letters
-    if (preg_match('/[a-z]/', $password)) {
-        $strength++;
-    }
-
-    // Check for special characters
-    if (preg_match('/[\W_]/', $password)) {
-        $strength++;
-    }
-
-    // Evaluate strength based on the number of passed tests
-    switch ($strength) {
-        case 1:
-            return "Very weak password.";
-        case 2:
-            return "Weak password.";
-        case 3:
-            return "Moderate password.";
-        case 4:
-            return "Strong password.";
-        case 5:
-            return "Very strong password.";
-        default:
-            return "Invalid password.";
-    }
-}
-
-$message = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $password = $_POST['password'] ?? '';
-    $message = checkPasswordStrength($password);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+ $password = $_POST['password'];
+ $strength = "Weak";
+ if (strlen($password) >= 8 &&
+ preg_match('/[A-Z]/', $password) &&
+ preg_match('/[a-z]/', $password) &&
+ preg_match('/[0-9]/', $password) &&
+ preg_match('/[\W]/', $password)) {
+ $strength = "Strong";
+ } elseif (strlen($password) >= 6) {
+ $strength = "Moderate";
+ }
 }
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-<title>Password Strength Checker</title>
+ <title>Password Strength Checker</title>
 </head>
 <body>
-    <h1>Password Strength Checker</h1>
-    <form method="post">
-        <label for="password">Enter your password:</label>
-        <input type="password" id="password" name="password" required>
-        <button type="submit">Check Strength</button>
-    </form>
-    <?php if (!empty($message)): ?>
-        <p><?php echo $message; ?></p>
-    <?php endif; ?>
+ <form method="post" action="">
+ Enter a password: <input type="password" name="password" required>
+ <input type="submit" value="Check">
+ </form>
+ <?php
+ if (isset($strength)) {
+ echo "<p>Password strength: $strength</p>";
+ }
+ ?>
 </body>
 </html>
+_________________________
