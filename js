@@ -16,8 +16,6 @@
         function findDuplicates(arr) {
             let duplicates = {};
             let result = [];
-
-            // Iterate through the array
             for (let i = 0; i < arr.length; i++) {
                 // If element is already in duplicates object, it's a duplicate
                 if (duplicates[arr[i]] !== undefined) {
